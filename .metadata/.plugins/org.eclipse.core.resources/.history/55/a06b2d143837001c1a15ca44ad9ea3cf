@@ -1,0 +1,20 @@
+package es.addbl3.AE3;
+
+public class prueba2 {
+
+	public static void main(String[] args) {
+		
+		String c="*";
+		int r=5, v=3;
+	
+		
+	}
+	
+	public String metodo (String c, int r, int v) {
+		String cadena="";
+		
+		return cadena;
+		
+	}
+
+}

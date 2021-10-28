@@ -1,0 +1,11 @@
+package es.addbl3.AE3;
+
+public class main {
+
+	public static void main(String[] args) {
+		Libro miLibro = new Libro (1, "pepa y paco", "lolito", "2022", "Ed. Truñisco", "320");
+		miLibro.mostrarLibro(miLibro);
+		
+	}
+
+}

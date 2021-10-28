@@ -1,0 +1,72 @@
+package es.addbl3.AE3;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
+import javax.xml.parsers.*;
+import org.w3c.dom.*;
+
+public class Libro {
+	private int identificador;
+	private String titulo, autor, año, editorial, numpag;
+	
+	public Libro (int identificador, String titulo, String autor, String año, String editorial, String numpag) {
+		this.identificador=identificador;
+		this.titulo=titulo;
+		this.autor=autor;
+		this.año=año;
+		this.editorial=editorial;
+		this.numpag=numpag;
+	}
+	
+	public int crearLibro (Libro libto) {
+		int identificador=0;
+		return identificador;
+	}
+	
+//	public Libro recuperarLibro (int identificador) {
+//		
+//		return libro;
+//	}
+	
+	public void mostrarLibro (Libro libro) {
+		System.out.println ("Id: "+String.valueOf(libro.identificador)+"\nTítulo: "+libro.titulo+"\nAutor: "+libro.autor
+				+"\nAño: "+libro.año+"\nEditorial: "+libro.editorial+"\nNº páginas: "+libro.numpag);
+	}
+	
+	public void borrarLibro (int identificador) {
+		
+	}
+	
+	public void actualizarLibro (int identificador) {
+		
+	}
+
+	
+	public class Biblioteca {
+				
+		public ArrayList<Libro> recuperarTodos() {
+			ArrayList<Libro> listado = new ArrayList<Libro>();
+			try {
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(new File("biblioteca.xml"));
+			
+			
+			
+			} catch (ParserConfigurationException e) {
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+			return listado;
+		}
+	}
+	
+	
+}
+	
+
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<biblioteca>
+    <libro>
+        <identificador>1</identificador>
+        <titulo>Teo se va de vacaciones</titulo>
+        <autor>Theo Marconi</autor>
+        <año>1985</año>
+        <editorial>Pipiolos</editorial>
+        <numpag>15</numpag>
+    </libro>
+     <libro>
+        <identificador>2</identificador>
+        <titulo>Teo aprende Javascript</titulo>
+        <autor>Sato Marconi</autor>
+        <año>2017</año>
+        <editorial>YaTeVeo</editorial>
+        <numpag>20</numpag>
+    </libro>
+     <libro>
+        <identificador>3</identificador>
+        <titulo>Teo come macarrones con tomate</titulo>
+        <autor>Theo Hambrunas</autor>
+        <año>2020</año>
+        <editorial>Allioli ediciones</editorial>
+        <numpag>25</numpag>
+    </libro>
+     <libro>
+        <identificador>4</identificador>
+        <titulo>Teo aprueba DAM</titulo>
+        <autor>Mike Felicidad</autor>
+        <año>2022</año>
+        <editorial>Flor Ida</editorial>
+        <numpag>55</numpag>
+    </libro>
+     <libro>
+        <identificador>4</identificador>
+        <titulo>Teo se tira de los pocos pelos que le quedan</titulo>
+        <autor>Panchurrin Taketero</autor>
+        <año>2034</año>
+        <editorial>YaTuSabeh</editorial>
+        <numpag>100</numpag>
+    </libro>
+
+
+</biblioteca>

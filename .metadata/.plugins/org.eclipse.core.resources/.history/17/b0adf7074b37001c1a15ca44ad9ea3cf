@@ -1,0 +1,27 @@
+package es.addbl3.AE3;
+
+public class prueba2 {
+
+	public static void main(String[] args) {
+		
+		String c="*";
+		int r=5, v=3;
+		
+		metodo(c,r,v);
+	
+		
+	}
+	
+	public static String metodo (String c, int r, int v) {
+		String cadena="";
+		for (int i=0;i<r;i++) {
+			cadena+=c;
+		}
+		for (int j=0;j<v;j++) {
+			System.out.println(cadena);
+}
+		
+		return cadena;
+	}
+
+}

@@ -1,0 +1,24 @@
+package es.addbl3.AE3;
+
+import java.util.Scanner;
+
+public class main {
+
+	public static void main(String[] args) {
+		Libro miLibro = new Libro (1, "pepa y paco", "lolito", "2022", "Ed. Truñisco", "320");
+		miLibro.mostrarLibro(miLibro);
+		Scanner teclado = new Scanner (System.in);
+		String respuesta="";
+		while (!respuesta.equals("6")) {
+			System.out.println("1. Mostrar todos los títulos de la biblioteca\n"
+					+ "2. Mostrar información detallada de un libro\n"
+					+ "3. Crear un nuevo libro\n"
+					+ "4. Actualizar libro\n"
+					+ "5. Borrar libro\n"
+					+ "6. Cerrar la biblioteca");
+			respuesta=teclado.nextLine();
+			
+		}
+	}
+
+}

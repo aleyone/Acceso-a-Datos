@@ -1,0 +1,22 @@
+package es.addbl3.AE3;
+
+public class prueba {
+	
+	public static int cualMayor (int n1, int n2) {
+		if (n1 > n2) {
+			return n1;
+		} else if (n2 > n1) {
+			return n2;
+		} else return 1;
+	}
+
+	public static void main(String[] args) {
+		int n1=1;
+		int n2=1;
+		int resultado = cualMayor(n1, n2);
+		if (resultado==1) {
+			System.out.println("Son iguales");
+		} else System.out.println("El mayor es: "+resultado);
+	}
+
+}

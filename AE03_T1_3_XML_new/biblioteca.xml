@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<biblioteca>
+    <libro>
+        <identificador>2</identificador>
+        <titulo>Teo aprende Javascript</titulo>
+        <autor>Sato Marconi</autor>
+        <año>2017</año>
+        <editorial>Sato Marconi</editorial>
+        <numpag>20</numpag>
+    </libro>
+    <libro>
+        <identificador>3</identificador>
+        <titulo>Teo come macarrones con tomate</titulo>
+        <autor>Theo Hambrunas</autor>
+        <año>2020</año>
+        <editorial>Theo Hambrunas</editorial>
+        <numpag>25</numpag>
+    </libro>
+    <libro>
+        <identificador>4</identificador>
+        <titulo>Teo aprueba DAM</titulo>
+        <autor>Mike Felicidad</autor>
+        <año>2022</año>
+        <editorial>Mike Felicidad</editorial>
+        <numpag>55</numpag>
+    </libro>
+    <libro>
+        <identificador>4</identificador>
+        <titulo>Titulo modificado</titulo>
+        <autor>autor 1</autor>
+        <año>2034</año>
+        <editorial>editorial</editorial>
+        <numpag>100</numpag>
+    </libro>
+</biblioteca>

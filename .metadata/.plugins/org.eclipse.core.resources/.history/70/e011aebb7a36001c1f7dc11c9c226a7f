@@ -1,0 +1,91 @@
+package es.addbl3.AE3;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.xml.parsers.*;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+public class Libro {
+	private int identificador;
+	private String titulo, autor, año, editorial, numpag;
+	
+//		public Libro (int identificador, String titulo, String autor, String año, String editorial, String numpag) {
+//		this.identificador=identificador;
+//		this.titulo=titulo;
+//		this.autor=autor;
+//		this.año=año;
+//		this.editorial=editorial;
+//		this.numpag=numpag;	}
+
+	public Libro(int identificador2, String titulo2, String autor2, String año2, String editorial2,
+				String numpag2) {
+		this.identificador=identificador2;
+		this.titulo=titulo2;
+		this.autor=autor2;
+		this.año=año2;
+		this.editorial=editorial2;
+		this.numpag=numpag2;		}
+
+	public int crearLibro (Libro libto) {
+		int identificador=0;
+		return identificador;
+	}
+	
+//	public Libro recuperarLibro (int identificador) {
+//		
+//		return libro;
+//	}
+	
+	public void mostrarLibro (Libro libro) {
+		System.out.println ("Id: "+String.valueOf(libro.identificador)+"\nTítulo: "+libro.titulo+"\nAutor: "+libro.autor
+				+"\nAño: "+libro.año+"\nEditorial: "+libro.editorial+"\nNº páginas: "+libro.numpag);
+	}
+	
+	public void borrarLibro (int identificador) {
+		
+	}
+	
+	public void actualizarLibro (int identificador) {
+		
+	}
+
+	
+	//public class Biblioteca {
+				
+	/*	public ArrayList<Libro> recuperarTodos() {
+			ArrayList<Libro> listado = new ArrayList<Libro>();
+			try {
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(new File("biblioteca.xml"));
+			Element raiz = doc.getDocumentElement();
+			NodeList nodeList = doc.getElementsByTagName("libro");
+			for (int i=0; i<nodeList.getLength();i++) {
+				Node node = nodeList.item(i);
+				Element element = (Element) node;
+				int id=Integer.parseInt(element.getElementsByTagName("identificador").item(0).getTextContent());
+				String tit= element.getElementsByTagName("titulo").item(0).getTextContent();
+				String aut= element.getElementsByTagName("autor").item(0).getTextContent();
+				String any= element.getElementsByTagName("año").item(0).getTextContent();
+				String edit= element.getElementsByTagName("editorial").item(0).getTextContent();
+				String nump= element.getElementsByTagName("numpag").item(0).getTextContent();
+				Libro librosXML = new Libro(id, tit, aut, año, edit, nump);
+				listado.add(librosXML);
+				}			
+			
+			} catch (ParserConfigurationException e) {
+				e.printStackTrace();
+			} catch (SAXException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			return listado;
+		}*/
+
+//	}
+}
