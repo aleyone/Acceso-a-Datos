@@ -1,0 +1,95 @@
+package es.add4.aev4;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JTextArea;
+
+public class Vista extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Vista frame = new Vista();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Vista() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setForeground(Color.BLACK);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnNewButton = new JButton("Cargar desde CSV");
+		btnNewButton.setFont(new Font("Verdana", Font.BOLD, 8));
+		btnNewButton.setBackground(new Color(173, 216, 230));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(25, 24, 121, 40);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Consulta Personalizada");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1.setFont(new Font("Verdana", Font.BOLD, 8));
+		btnNewButton_1.setBackground(new Color(173, 216, 230));
+		btnNewButton_1.setBounds(25, 204, 131, 25);
+		contentPane.add(btnNewButton_1);
+		
+		JTextArea textArea = new JTextArea("SELECT * FROM libros");
+		textArea.setBounds(25, 230, 247, 22);
+		contentPane.add(textArea);
+		
+		JButton btnNewButton_1_1 = new JButton("Ej. Consulta 2");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1_1.setFont(new Font("Verdana", Font.BOLD, 8));
+		btnNewButton_1_1.setBackground(new Color(173, 216, 230));
+		btnNewButton_1_1.setBounds(302, 204, 93, 25);
+		contentPane.add(btnNewButton_1_1);
+		
+		JButton btnNewButton_1_2 = new JButton("Ej. Consulta 1");
+		btnNewButton_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1_2.setFont(new Font("Verdana", Font.BOLD, 8));
+		btnNewButton_1_2.setBackground(new Color(173, 216, 230));
+		btnNewButton_1_2.setBounds(166, 204, 93, 25);
+		contentPane.add(btnNewButton_1_2);
+	}
+}

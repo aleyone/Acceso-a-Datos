@@ -1,0 +1,158 @@
+package es.add4.aev4;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+
+public class Vista2 extends JFrame {
+
+	private JPanel contentPane;
+	private JButton btnCargarCsv;
+	private JTextArea textArea;
+	private JButton btnExportCsv;
+	private JButton btnInsertar;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JButton btnConsultar;
+	private JTextField textField_6;
+	private JButton btnConsultarLibro;
+	private JButton btnConsultarEditorial;
+	
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Vista2 frame = new Vista2();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Vista2() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 800, 400);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		btnCargarCsv = new JButton("Cargar CSV");
+		btnCargarCsv.setBounds(10, 22, 118, 44);
+		contentPane.add(btnCargarCsv);
+		
+		textArea = new JTextArea();
+		textArea.setBounds(138, 21, 492, 128);
+		contentPane.add(textArea);
+		
+		btnExportCsv = new JButton("Exportar a CSV");
+		btnExportCsv.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnExportCsv.setBounds(10, 77, 118, 44);
+		contentPane.add(btnExportCsv);
+		
+		btnInsertar = new JButton("Insertar Registro");
+		btnInsertar.setBounds(660, 320, 118, 44);
+		contentPane.add(btnInsertar);
+		
+		textField = new JTextField();
+		textField.setBounds(20, 332, 96, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(126, 332, 96, 20);
+		contentPane.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(236, 332, 96, 20);
+		contentPane.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(342, 332, 96, 20);
+		contentPane.add(textField_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(448, 332, 96, 20);
+		contentPane.add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(554, 332, 96, 20);
+		contentPane.add(textField_5);
+		
+		JLabel lblNewLabel = new JLabel("T\u00EDtulo");
+		lblNewLabel.setBounds(20, 319, 49, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblAutor = new JLabel("Autor");
+		lblAutor.setBounds(126, 319, 49, 14);
+		contentPane.add(lblAutor);
+		
+		JLabel lblAoNac = new JLabel("A\u00F1o Nac.");
+		lblAoNac.setBounds(236, 319, 49, 14);
+		contentPane.add(lblAoNac);
+		
+		JLabel lblAoPub = new JLabel("A\u00F1o Pub");
+		lblAoPub.setBounds(342, 319, 49, 14);
+		contentPane.add(lblAoPub);
+		
+		JLabel lblEditorial = new JLabel("Editorial");
+		lblEditorial.setBounds(448, 319, 49, 14);
+		contentPane.add(lblEditorial);
+		
+		JLabel lblNPg = new JLabel("N\u00BA p\u00E1g.");
+		lblNPg.setBounds(554, 319, 49, 14);
+		contentPane.add(lblNPg);
+		
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.setBounds(660, 157, 118, 44);
+		contentPane.add(btnConsultar);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(138, 160, 492, 38);
+		contentPane.add(textField_6);
+		
+		btnConsultarLibro = new JButton("Ej. Libros");
+		btnConsultarLibro.setBounds(660, 22, 118, 44);
+		contentPane.add(btnConsultarLibro);
+		
+		btnConsultarEditorial = new JButton("Ej. Editorial");
+		btnConsultarEditorial.setBounds(660, 77, 118, 44);
+		contentPane.add(btnConsultarEditorial);
+		
+		setVisible(true);
+	}
+	
+	public JButton getCargarCsv() {
+		return btnCargarCsv;
+	}
+	
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+}

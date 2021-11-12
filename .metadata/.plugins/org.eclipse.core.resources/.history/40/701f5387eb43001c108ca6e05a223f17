@@ -1,0 +1,52 @@
+package es.add4.aev4;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class Controlador {
+
+	private Modelo modelo;
+	private Vista2 vista;
+	private ActionListener alCargarCsv;
+	private ActionListener alExportarCsv;
+	private ActionListener alInsertar;
+	private ActionListener alConsultaLibros;
+	private ActionListener alConsultaEditorial;
+	private ActionListener alConsultaPersonal;
+	private String ficheroOrigen, ficheroDestino;
+	
+	public Controlador (Modelo modelo, Vista2 vista) {
+		this.modelo=modelo;
+		this.vista=vista;
+		control();
+	}
+
+	public void control() {
+		ficheroOrigen="AE04_T1_4_JDBC_Datos.csv";
+		ficheroDestino="export.csv";
+		
+		alCargarCsv = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				modelo.leerFichero(ficheroOrigen);
+				vista.getTextArea().append("Se ha cargado el CSV. Revisa phpMyAdmin");
+			}
+		};
+		vista.getCargarCsv().addActionListener(alCargarCsv);
+		
+//		alInsertar = new ActionListener() {
+//			public void actionPerformed(ActionEvent actionEvent) {
+//				
+//			}
+//		}
+	
+		
+		
+	}
+	
+
+	
+}

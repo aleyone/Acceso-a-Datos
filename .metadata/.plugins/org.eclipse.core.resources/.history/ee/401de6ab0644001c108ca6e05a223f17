@@ -1,0 +1,241 @@
+package es.add4.aev4;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+public class Modelo {
+
+	// String fichero = "AE04_T1_4_JDBC_Datos.csv";
+
+	/**
+	 * leemos el fichero csv y lo vamos introduciendo en la tabla con el método
+	 * añadirBBDD
+	 * 
+	 * @param fichero le pasamos el nombre del fichero
+	 */
+	public void leerFichero(String ficheroOrigen) {
+		vaciarTabla(); // Garantizamos que al leer un CSV tenemos la tabla vacía
+		File file = new File(ficheroOrigen);
+		try {
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+			String linea = br.readLine();
+			linea = br.readLine();
+			while (linea != null) {
+				String[] datos = linea.split(";");
+				añadirBBDD(datos);
+				linea = br.readLine();
+			}
+			br.close();
+			fr.close();
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	/**
+	 * Se introduce la tabla en la BBDD.
+	 * 
+	 * @param datos se le pasan los argumentos del csv
+	 */
+	public void añadirBBDD(String[] datos) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/aev4_libreria", "root", "");
+			PreparedStatement psInsertar = con.prepareStatement(
+					"INSERT INTO libros (titulo, autor, año_nac, año_pub, editorial, num_pag) VALUES (?,?,?,?,?,?)");
+			for (int i = 0; i < datos.length; i++) { // Si encuentra algún dato vacío añade N.C.
+				if (datos[i].equals("")) {
+					datos[i] = "N.C.";
+				}
+			}
+			psInsertar.setString(1, datos[0]);
+			psInsertar.setString(2, datos[1]);
+			psInsertar.setString(3, datos[2]);
+			psInsertar.setString(4, datos[3]);
+			psInsertar.setString(5, datos[4]);
+			psInsertar.setString(6, datos[5]);
+			int resultadoInsertar = psInsertar.executeUpdate();
+
+			psInsertar.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+
+	/**
+	 * Se consultan los libros de autores nacidos antes de 1950
+	 */
+	public void consultaLibros() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/aev4_libreria", "root", "");
+			Statement stmt = con.createStatement();
+			String año = "1950";
+			ResultSet rs = stmt.executeQuery("SELECT titulo, autor, año_pub FROM libros WHERE año_nac < '" + año + "'");
+			while (rs.next()) {
+				System.out.println("Título: " + rs.getString(1) + "    Autor: " + rs.getString(2)
+						+ "    Año Publicación: " + rs.getString(3) + "\n");
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+
+	/**
+	 * Se consultan las editoriales con libros en siglo XXI
+	 */
+	public void consultaEditoriales() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/aev4_libreria", "root", "");
+			Statement stmt = con.createStatement();
+			String año = "2000";
+			ResultSet rs = stmt.executeQuery("SELECT editorial FROM libros WHERE año_pub >= '" + año + "'");
+			while (rs.next()) {
+				System.out.println("Editorial: " + rs.getString(1));
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	/**
+	 * creo un método para que la tabla no se llene en cada ejecución. Reorganizamos
+	 * los ids, para que estén en orden
+	 */
+	public void vaciarTabla() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/aev4_libreria", "root", "");
+			PreparedStatement psBorrar = con.prepareStatement("DELETE FROM libros");
+			PreparedStatement psActualizarId = con.prepareStatement("ALTER TABLE libros AUTO_INCREMENT = 1");
+			psBorrar.executeUpdate();
+			psActualizarId.executeUpdate();
+			psActualizarId.close();
+			psBorrar.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	/**
+	 * se recoge la SQL por entrada de teclado y devuelve el resultado de la Query
+	 * por pantalla
+	 */
+	public String consultaPersonalizada(String consulta) {
+		String linea="";
+		String resultado="";
+		//Scanner teclado = new Scanner(System.in);
+		//System.out.print("Introduce tu consulta SQL: ");
+		//String sqlUsuario = teclado.nextLine();
+//		String[] argumentos = sqlUsuario.split(","); // Se revisa cuántos args se le pasa en la consulta
+//		int cantidadArgumentos = argumentos.length;
+//		if (cantidadArgumentos == 0) { // Si no ha encontrado args separados por ',' se entiende que solo hay uno
+//			cantidadArgumentos = 1;
+//		}
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/aev4_libreria", "root", "");
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(consulta); // se ejecuta la Query
+			int numColumnas = rs.getMetaData().getColumnCount();
+			while (rs.next()) {
+				for (int i = 1; i <= numColumnas; i++) {
+					System.out.print(rs.getString(i) + "\n"); // se muestra el resultado por pantalla en función
+																		// del número de args pasados
+					linea += (rs.getString(i));
+					}
+				resultado += (linea+"\n");
+				
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+		return resultado;
+	}
+
+	public void exportarCSV(String ficheroDestino) {
+		File file = new File(ficheroDestino);
+		if (file.exists()) {
+			file.delete();
+		}
+		String[] cabecera = { "Id", "titulo", "autor", "año nacimiento", "año publicación", "editorial",
+				"número de páginas" };
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/aev4_libreria", "root", "");
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM libros");
+			int numColumnas = rs.getMetaData().getColumnCount();
+			try {
+				FileWriter fw = new FileWriter(file);
+				BufferedWriter bw = new BufferedWriter(fw);
+				for (int z = 0; z < cabecera.length; z++) {
+					bw.write(cabecera[z] + ";");
+
+				}
+				bw.newLine();
+				while (rs.next()) {
+					for (int i = 1; i <= numColumnas; i++) {
+						bw.write(rs.getString(i) + ";");
+					}
+					bw.newLine();
+
+				}
+				bw.close();
+				fw.close();
+
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (ClassNotFoundException e1) {
+			JOptionPane.showMessageDialog(new JFrame(), e1.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		} catch (SQLException e2) {
+			JOptionPane.showMessageDialog(new JFrame(), e2.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+}

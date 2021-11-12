@@ -1,0 +1,184 @@
+package es.add4.aev4;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JTextArea;
+import javax.swing.JLabel;
+
+public class Vista extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Vista frame = new Vista();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Vista() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 569, 393);
+		contentPane = new JPanel();
+		contentPane.setForeground(Color.BLACK);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnCargarCsv = new JButton("Cargar desde CSV");
+		btnCargarCsv.setFont(new Font("Verdana", Font.BOLD, 8));
+		btnCargarCsv.setBackground(new Color(173, 216, 230));
+		btnCargarCsv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCargarCsv.setBounds(0, 0, 121, 40);
+		contentPane.add(btnCargarCsv);
+		
+		JButton btnNewButton_1 = new JButton("Consulta Personalizada");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1.setFont(new Font("Verdana", Font.BOLD, 8));
+		btnNewButton_1.setBackground(new Color(173, 216, 230));
+		btnNewButton_1.setBounds(25, 231, 131, 25);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_1_1 = new JButton("Ej. Consulta 2");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1_1.setFont(new Font("Verdana", Font.BOLD, 8));
+		btnNewButton_1_1.setBackground(new Color(173, 216, 230));
+		btnNewButton_1_1.setBounds(333, 204, 93, 25);
+		contentPane.add(btnNewButton_1_1);
+		
+		JButton btnNewButton_1_2 = new JButton("Ej. Consulta 1");
+		btnNewButton_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1_2.setFont(new Font("Verdana", Font.BOLD, 8));
+		btnNewButton_1_2.setBackground(new Color(173, 216, 230));
+		btnNewButton_1_2.setBounds(238, 204, 93, 25);
+		contentPane.add(btnNewButton_1_2);
+		
+		JButton btnNewButton_2 = new JButton("Insertar datos");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_2.setFont(new Font("Verdana", Font.BOLD, 8));
+		btnNewButton_2.setBackground(new Color(173, 216, 230));
+		btnNewButton_2.setBounds(10, 125, 105, 25);
+		contentPane.add(btnNewButton_2);
+		
+		textField = new JTextField();
+		textField.setBounds(121, 130, 96, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(227, 130, 96, 20);
+		contentPane.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(330, 130, 96, 20);
+		contentPane.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(121, 154, 96, 20);
+		contentPane.add(textField_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(227, 154, 96, 20);
+		contentPane.add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(330, 154, 96, 20);
+		contentPane.add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(166, 232, 260, 20);
+		contentPane.add(textField_6);
+		
+		JLabel lblNewLabel = new JLabel("T\u00EDtulo");
+		lblNewLabel.setBounds(125, 117, 49, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblAutor = new JLabel("Autor");
+		lblAutor.setBounds(227, 117, 49, 14);
+		contentPane.add(lblAutor);
+		
+		JLabel lblAoNacimiento = new JLabel("A\u00F1o Nacimiento");
+		lblAoNacimiento.setBounds(333, 117, 93, 14);
+		contentPane.add(lblAoNacimiento);
+		
+		JLabel lblAoPublic = new JLabel("A\u00F1o public.");
+		lblAoPublic.setBounds(168, 179, 65, 14);
+		contentPane.add(lblAoPublic);
+		
+		JLabel lblEditorial = new JLabel("Editorial");
+		lblEditorial.setBounds(282, 179, 49, 14);
+		contentPane.add(lblEditorial);
+		
+		JLabel lblNPginas = new JLabel("N\u00BA p\u00E1ginas");
+		lblNPginas.setBounds(372, 179, 54, 14);
+		contentPane.add(lblNPginas);
+		
+		JButton btnExportarACsv = new JButton("Exportar a CSV");
+		btnExportarACsv.setFont(new Font("Verdana", Font.BOLD, 8));
+		btnExportarACsv.setBackground(new Color(173, 216, 230));
+		btnExportarACsv.setBounds(0, 43, 121, 40);
+		contentPane.add(btnExportarACsv);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(131, 7, 295, 99);
+		contentPane.add(textArea);
+		
+		setVisible(true); // Se inicializa
+	}
+	
+//	public JButton getCargarCsv() {
+//		return btnCargarCsv;
+//	}
+}

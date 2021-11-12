@@ -1,0 +1,163 @@
+package es.add4.aev4;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class biblioteca {
+
+	public static void main(String[] args) {
+		String fichero = "AE04_T1_4_JDBC_Datos.csv";
+		vaciarTabla();
+		leerFichero(fichero);
+		consultaLibros();
+		consultaEditoriales();
+		
+	}
+	
+	public static void leerFichero(String fichero) {
+		File file = new File(fichero);
+		try {
+			FileReader fr = new FileReader (file);
+			BufferedReader br = new BufferedReader (fr);
+			String linea=br.readLine();
+			linea = br.readLine();
+			while (linea!=null) {
+			String[] datos = linea.split(";");
+			añadirBBDD(datos);
+			linea = br.readLine();
+			}
+			br.close();
+			fr.close();
+		} catch (FileNotFoundException e) {
+			System.err.print("Fichero no encontrado");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			
+		
+	}
+	
+	public static void añadirBBDD(String[] datos) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/aev4_libreria","root","");
+			PreparedStatement psInsertar = con.prepareStatement("INSERT INTO libros (titulo, autor, año_nac, año_pub, editorial, num_pag) VALUES (?,?,?,?,?,?)");
+			for (int i=0; i<datos.length;i++) {
+				if(datos[i].equals("")) {
+					datos[i]="N.C.";
+				}
+			}
+			psInsertar.setString(1, datos[0]);
+			psInsertar.setString(2, datos[1]);
+			psInsertar.setString(3, datos[2]);
+			psInsertar.setString(4, datos[3]);
+			psInsertar.setString(5, datos[4]);
+			psInsertar.setString(6, datos[5]);
+			int resultadoInsertar = psInsertar.executeUpdate();
+			if (resultadoInsertar > 0) {
+				System.err.println("Linea introducida.");
+			}
+			psInsertar.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+		public static void consultaLibros () {
+			try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost/aev4_libreria","root","");
+					Statement stmt = con.createStatement();
+					String año = "1950";
+					ResultSet rs = stmt.executeQuery("SELECT titulo, autor, año_pub FROM libros WHERE año_nac < '"+año+"'");
+					while(rs.next()) {
+						System.out.println("Título: "+rs.getString(1)+"    Autor: "+rs.getString(2)+"    Año Publicación: "+rs.getString(3)+"\n");
+					}
+					rs.close();
+					stmt.close();
+					con.close();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+							
+			}
+		
+		public static void consultaEditoriales() {
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/aev4_libreria","root","");
+				Statement stmt = con.createStatement();
+				String año = "2000";
+				ResultSet rs = stmt.executeQuery("SELECT editorial FROM libros WHERE año_pub > '"+año+"'");
+				while(rs.next()) {
+					System.out.println("Editorial: "+rs.getString(1));
+				}
+				rs.close();
+				stmt.close();
+				con.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		public static void vaciarTabla (){
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/aev4_libreria","root","");
+				PreparedStatement psBorrar = con.prepareStatement("DELETE FROM libros");
+				PreparedStatement psActualizarId = con.prepareStatement("ALTER TABLE libros AUTO_INCREMENT = 1");
+				psBorrar.executeUpdate();
+				psActualizarId.executeUpdate();
+				psActualizarId.close();
+				psBorrar.executeUpdate();
+				con.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		public static void consultaPersonalizada() {
+			Scanner teclado = new Scanner(System.in);
+			System.out.print("Introduce tu consulta SQL: ");
+			String sqlUsuario = teclado.nextLine();
+			
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/aev4_libreria","root","");
+				Statement stmt = con.createStatement();
+				String año = "1950";
+				ResultSet rs = stmt.executeQuery(sqlUsuario);
+				while(rs.next()) {
+					System.out.println("Título: "+rs.getString(1)+"    Autor: "+rs.getString(2)+"    Año Publicación: "+rs.getString(3)+"\n");
+				}
+				rs.close();
+				stmt.close();
+				con.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+}

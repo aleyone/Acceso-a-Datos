@@ -1,0 +1,71 @@
+package es.add4.aev4;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+
+public class Vista2 extends JFrame {
+
+	private JPanel contentPane;
+	private JButton btnCargarCsv;
+	private JTextArea textArea;
+	private JButton btnExportCsv;
+	
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Vista2 frame = new Vista2();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Vista2() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 900, 600);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		btnCargarCsv = new JButton("Cargar CSV");
+		btnCargarCsv.setBounds(10, 11, 118, 44);
+		contentPane.add(btnCargarCsv);
+		
+		textArea = new JTextArea();
+		textArea.setBounds(10, 11, 118, 44);
+		contentPane.add(textArea);
+		
+		btnExportCsv = new JButton("Exportar a CSV");
+		btnExportCsv.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnExportCsv.setBounds(602, 22, 89, 23);
+		contentPane.add(btnExportCsv);
+		
+		setVisible(true);
+	}
+	
+	public JButton getCargarCsv() {
+		return btnCargarCsv;
+	}
+	
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+}

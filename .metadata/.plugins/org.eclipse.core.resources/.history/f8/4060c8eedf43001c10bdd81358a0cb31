@@ -1,0 +1,113 @@
+package AE04;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+import java.awt.Color;
+import java.awt.Font;
+
+public class Vista {
+
+	private JFrame frame;
+	private JTextField textField_Mostrar_Consulta;
+
+	private JTextField textField_Consulta;
+
+	private JButton btnMostrar_Consulta;
+	private JButton btnMostrar_Consulta1;
+	private JButton btnMostrar_Consulta2;
+	private JButton btnSubir_Csv;
+
+	private JTextArea textArea_Consultas;
+
+	public Vista() {
+		inicialize();
+	}
+
+	// Metodo inicialize
+	// Descripcion: metodo que modifica posicion de los botones, recuadros de texto
+	// y el area del texto
+	// Parametros entrada: no
+	// Parametros salida: no
+
+	public void inicialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 600, 400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setBackground(new Color(238, 238, 238));
+
+		JScrollPane scrollPane_Original = new JScrollPane();
+		scrollPane_Original.setBounds(10, 10, 560, 220);
+		frame.getContentPane().add(scrollPane_Original);
+
+		textArea_Consultas = new JTextArea();
+		textArea_Consultas.setLineWrap(true);
+		textArea_Consultas.setRows(12);
+		scrollPane_Original.setColumnHeaderView(textArea_Consultas);
+		scrollPane_Original.getViewport().setView(textArea_Consultas);
+
+		btnMostrar_Consulta = new JButton("Consultas");
+		btnMostrar_Consulta.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnMostrar_Consulta.setBounds(10, 252, 120, 27);
+		frame.getContentPane().add(btnMostrar_Consulta);
+
+		btnMostrar_Consulta1 = new JButton("Consulta1");
+		btnMostrar_Consulta1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnMostrar_Consulta1.setBounds(150, 252, 120, 27);
+		frame.getContentPane().add(btnMostrar_Consulta1);
+
+		btnMostrar_Consulta2 = new JButton("Consulta2");
+		btnMostrar_Consulta2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnMostrar_Consulta2.setBounds(300, 252, 120, 27);
+		frame.getContentPane().add(btnMostrar_Consulta2);
+
+		btnSubir_Csv = new JButton("Subir");
+		btnSubir_Csv.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnSubir_Csv.setBounds(450, 252, 120, 27);
+		frame.getContentPane().add(btnSubir_Csv);
+
+		textField_Consulta = new JTextField();
+		textField_Consulta.setBounds(10, 300, 220, 27);
+		frame.getContentPane().add(textField_Consulta);
+		textField_Consulta.setColumns(100);
+
+		this.frame.setVisible(true);
+	}
+
+	// Metodos getters JButton, JTextField, JTextArea
+	// Descipcion:
+	// Parametros entrada: no
+	// Parametros salida: no
+
+	public JButton getbtnMostrar_Consulta() {
+		return btnMostrar_Consulta;
+	}
+
+	public JButton getbtnMostrar_Consulta1() {
+		return btnMostrar_Consulta1;
+	}
+
+	public JButton getbtnMostrar_Consulta2() {
+		return btnMostrar_Consulta2;
+	}
+
+	public JButton getbtnSubir_Csv() {
+		return btnSubir_Csv;
+	}
+
+	public JTextField gettextField_Mostrar_Consulta() {
+		return textField_Mostrar_Consulta;
+	}
+
+	public JTextArea gettextArea_Consultas() {
+		return textArea_Consultas;
+	}
+
+	public JTextField gettextField_Consulta() {
+		return textField_Consulta;
+	}
+}
