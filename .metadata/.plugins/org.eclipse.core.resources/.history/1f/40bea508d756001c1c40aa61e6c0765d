@@ -1,0 +1,51 @@
+package es.maven.actividadEvaluable5;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import org.hibernate.Session;
+
+public class Controlador {
+	private Modelo modelo;
+	private Vista vista;
+	private ActionListener alCreateConnection, alCloseConnection, alShowAll, alShowOne, alDeleteOne, alUpdate,
+			alCreateBook;
+	private List listBook;
+
+	public Controlador(Modelo modelo, Vista vista) {
+		this.modelo = modelo;
+		this.vista = vista;
+		control();
+	}
+
+	public void control() {
+		alCreateConnection = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				Session session = modelo.createConnection();
+				listBook.add(modelo.listBooks(session));
+				vista.getTextArea().setText("Se ha creado correctamente la conexión a la base de datos.");
+				}
+		};
+		vista.getBtnCreateConnection().addActionListener(alCreateConnection);
+
+		alCloseConnection = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				Session session = modelo.createConnection();
+				modelo.closeSession(session);
+				vista.getTextArea().setText("Se ha desconectado de la base de datos.");
+			}
+		};
+		vista.getBtnCloseConnection().addActionListener(alCloseConnection);
+		
+		alShowAll = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				Session session = modelo.createConnection();
+				modelo.showBooks(session, listBook);
+				
+			}
+		};
+		
+		
+	}
+}
