@@ -1,0 +1,114 @@
+package es.add.aemongodb;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bson.Document;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+
+public class Modelo {
+	
+	public MongoClient createConnection() {
+		MongoClient client = new MongoClient ("localhost", 27017);
+	//	getCollection(client);
+		return client;
+	}
+	
+	public MongoCollection getCollection(MongoClient client) {
+		MongoDatabase db = client.getDatabase("Discos");
+		MongoCollection<Document> collection = db.getCollection("Discos");
+		return collection;
+	}
+
+	public String listBooks (MongoCollection collection) {
+		String unido="";
+		List<String> resultado = new ArrayList<String>();
+		MongoCursor<Document> cursor= collection.find().iterator();
+		while(cursor.hasNext()) {
+		String fragmento = cursor.next().toJson();
+		resultado.add(fragmento);
+		}
+		for (int i=0;i<resultado.size();i++) {
+			unido += resultado.get(i)+"\n";
+		}
+		return unido;
+	}
+
+	/*public String showBooks(Session session, List listado) {
+
+		String result = "";
+		try {
+			for (Object n : listado) {
+				Libreria libros = (Libreria) n;
+				result += libros.AllToText();
+			}
+		} catch (NullPointerException e) {
+			result = "No estás conectado a la BBDD. Conéctate antes: " + e;
+		}
+		return result;
+
+	}
+
+	public String showOneBook(Session session, int id) {
+		String result="";
+		Libreria libro= new Libreria();
+		try {
+		libro = (Libreria) session.get(Libreria.class, id);
+		} catch (NullPointerException e) {
+			result="No estás conectado a la BBDD. Conéctate antes: "+e;
+		}
+		result = libro.OneToText();
+		return result;
+	}
+
+	public String[] detailsBook (Session session, int id) {
+		String[] result=new String[6];
+		Libreria libro = (Libreria) session.get(Libreria.class, id);
+		result[0]=libro.getTitulo();
+		result[1]=libro.getAutor();
+		result[2]=libro.getAño_nac();
+		result[3]=libro.getAño_pub();
+		result[4]=libro.getEditorial();
+		result[5]=String.valueOf(libro.getNum_pag());
+		return result;
+	}*/
+	
+	public void createBook (MongoCollection collection, String grupo, String titulo, int publicacion, String formato) {
+		Document doc = new Document();
+		doc.append("Grupo", grupo);
+		doc.append("Título", titulo);
+		doc.append("Año publicación", publicacion);
+		doc.append("Formato", formato);
+		collection.insertOne(doc);
+		
+	}
+
+	public void updateBook(MongoCollection collection, String criterio, String busqueda, String arg) {
+		
+			collection.updateMany(Filters.eq(criterio,busqueda), new Document("$set", new Document(criterio, arg)));
+		
+	}
+	
+	public void updateBook(MongoCollection collection, String criterio, int busqueda, int arg) {
+		
+		collection.updateMany(Filters.eq(criterio,busqueda), new Document("$set", new Document(criterio, arg)));
+	
+}
+
+	/*public void deleteBook(Session session, int id) {
+		Libreria del = new Libreria();
+		del.setId(id);
+		session.delete(del);
+		session.getTransaction().commit();
+	}*/
+
+	public void closeSession(MongoClient client) {
+		client.close();
+	}
+}
+

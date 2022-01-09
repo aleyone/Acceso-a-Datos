@@ -1,0 +1,222 @@
+package es.add.aemongodb;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+
+public class Vista extends JFrame{
+
+	private JPanel contentPane;
+	private JTextField textField_Titulo, textField_Autor, textField_Editorial, textField_AñoN, textField;
+	private JButton btnShowBooks, btnShowOneBook, btnDeleteBook, btnCreateConnection, btnUpdateBook, btnCreateBook; 
+	private JLabel lblNewLabel, lblAutor, lblAoN, lblEditorial;
+	private JTextArea textArea;
+	private JScrollBar scrollBar;
+	private JScrollBar scrollBar_1;
+	private JRadioButton rdbtnAnyoP, radioFormato, radioGrupo, radioTitulo;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	
+	/**
+	 * Create the application.
+	 */
+	public Vista() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 835, 622);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		//Definimos áreas de texto		
+		textArea = new JTextArea();
+		textArea.setBounds(10, 47, 801, 268);
+		contentPane.add(textArea);	
+		
+		// Se definen botones
+		btnCreateConnection = new JButton("Conectar a la BBDD");
+		btnCreateConnection.setForeground(Color.WHITE);
+		btnCreateConnection.setBackground(Color.BLACK);
+		btnCreateConnection.setBounds(10, 11, 216, 23);
+		contentPane.add(btnCreateConnection);
+		
+		btnUpdateBook = new JButton("Modifica el registro");
+		btnUpdateBook.setForeground(Color.WHITE);
+		btnUpdateBook.setBackground(Color.BLACK);
+		btnUpdateBook.setBounds(239, 490, 216, 23);
+		contentPane.add(btnUpdateBook);
+		
+		btnCreateBook = new JButton("Crear nuevo");
+		btnCreateBook.setForeground(Color.WHITE);
+		btnCreateBook.setBackground(Color.BLACK);
+		btnCreateBook.setBounds(678, 524, 133, 23);
+		contentPane.add(btnCreateBook);
+		
+		btnShowBooks = new JButton("Mostrar todos los libros");
+		btnShowBooks.setForeground(Color.WHITE);
+		btnShowBooks.setBackground(Color.BLACK);
+		btnShowBooks.setBounds(595, 326, 216, 23);
+		contentPane.add(btnShowBooks);
+		
+		btnShowOneBook = new JButton("Mostrar registro");
+		btnShowOneBook.setForeground(Color.WHITE);
+		btnShowOneBook.setBackground(Color.BLACK);
+		btnShowOneBook.setBounds(239, 457, 216, 23);
+		contentPane.add(btnShowOneBook);
+		
+		btnDeleteBook = new JButton("Elimina el registro");
+		btnDeleteBook.setForeground(Color.WHITE);
+		btnDeleteBook.setBackground(Color.BLACK);
+		btnDeleteBook.setBounds(239, 423, 216, 23);
+		contentPane.add(btnDeleteBook);
+		
+		//Definimos áreas de texto		
+		textField_Titulo = new JTextField();
+		textField_Titulo.setBounds(10, 525, 204, 20);
+		contentPane.add(textField_Titulo);
+		textField_Titulo.setColumns(10);
+		
+		textField_Autor = new JTextField();
+		textField_Autor.setColumns(10);
+		textField_Autor.setBounds(224, 525, 172, 20);
+		contentPane.add(textField_Autor);
+		
+		textField_Editorial = new JTextField();
+		textField_Editorial.setColumns(10);
+		textField_Editorial.setBounds(478, 525, 194, 20);
+		contentPane.add(textField_Editorial);
+		
+		textField_AñoN = new JTextField();
+		textField_AñoN.setColumns(10);
+		textField_AñoN.setBounds(406, 525, 62, 20);
+		contentPane.add(textField_AñoN);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(10, 476, 155, 37);
+		contentPane.add(textField);
+		
+		//Definimos etiquetas de texto		
+		lblNewLabel = new JLabel("Grupo");
+		lblNewLabel.setBounds(10, 545, 49, 14);
+		contentPane.add(lblNewLabel);
+		
+		lblAutor = new JLabel("T\u00EDtulo");
+		lblAutor.setBounds(224, 545, 49, 14);
+		contentPane.add(lblAutor);
+		
+		lblAoN = new JLabel("A\u00F1o P.");
+		lblAoN.setBounds(406, 545, 49, 14);
+		contentPane.add(lblAoN);
+		
+		lblEditorial = new JLabel("Formato");
+		lblEditorial.setBounds(488, 545, 49, 14);
+		contentPane.add(lblEditorial);
+		
+		radioTitulo = new JRadioButton("T\u00EDtulo");
+		buttonGroup.add(radioTitulo);
+		radioTitulo.setBounds(10, 386, 111, 23);
+		contentPane.add(radioTitulo);
+		
+		rdbtnAnyoP = new JRadioButton("A\u00F1o P.");
+		buttonGroup.add(rdbtnAnyoP);
+		rdbtnAnyoP.setBounds(10, 412, 111, 23);
+		contentPane.add(rdbtnAnyoP);
+		
+		radioFormato = new JRadioButton("Formato");
+		buttonGroup.add(radioFormato);
+		radioFormato.setBounds(10, 438, 111, 23);
+		contentPane.add(radioFormato);
+		
+		radioGrupo = new JRadioButton("Grupo");
+		buttonGroup.add(radioGrupo);
+		radioGrupo.setBounds(10, 360, 111, 23);
+		contentPane.add(radioGrupo);
+		
+		setVisible(true);
+		
+	}
+
+	public JTextField getTextField_Titulo() {
+		return textField_Titulo;
+	}
+
+	public JTextField getTextField_Autor() {
+		return textField_Autor;
+	}
+
+	public JTextField getTextField_Editorial() {
+		return textField_Editorial;
+	}
+
+	public JTextField getTextField_AñoN() {
+		return textField_AñoN;
+	}
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public JButton getBtnShowBooks() {
+		return btnShowBooks;
+	}
+
+	public JButton getBtnShowOneBook() {
+		return btnShowOneBook;
+	}
+
+	public JButton getBtnDeleteBook() {
+		return btnDeleteBook;
+	}
+
+	public JButton getBtnCreateConnection() {
+		return btnCreateConnection;
+	}
+
+	public JButton getBtnUpdateBook() {
+		return btnUpdateBook;
+	}
+
+	public JButton getBtnCreateBook() {
+		return btnCreateBook;
+	}
+
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+
+	public JRadioButton getRdbtnAnyoP() {
+		return rdbtnAnyoP;
+	}
+
+	public JRadioButton getRadioFormato() {
+		return radioFormato;
+	}
+
+	public JRadioButton getRadioGrupo() {
+		return radioGrupo;
+	}
+
+	public JRadioButton getRadioTitulo() {
+		return radioTitulo;
+	}
+}

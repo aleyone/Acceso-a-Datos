@@ -1,0 +1,104 @@
+package es.add.aemongodb;
+
+import java.util.List;
+
+import org.bson.Document;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+
+public class Modelo {
+
+	public MongoCollection createConnection() {
+		MongoClient client = new MongoClient ("localhost", 27017);
+		MongoDatabase db = client.getDatabase("Discos");
+		MongoCollection<Document> collection = db.getCollection("Discos");
+
+		return collection;
+	}
+
+	public String listBooks (MongoCollection collection) {
+		String resultado="";
+		MongoCursor<Document> cursor= collection.find(Filters.eq("Formato", "")).iterator();
+		while(cursor.hasNext()) {
+		resultado+= (cursor.next().toJson());
+		}
+		return resultado;
+	}
+
+	/*public String showBooks(Session session, List listado) {
+
+		String result = "";
+		try {
+			for (Object n : listado) {
+				Libreria libros = (Libreria) n;
+				result += libros.AllToText();
+			}
+		} catch (NullPointerException e) {
+			result = "No estás conectado a la BBDD. Conéctate antes: " + e;
+		}
+		return result;
+
+	}
+
+	public String showOneBook(Session session, int id) {
+		String result="";
+		Libreria libro= new Libreria();
+		try {
+		libro = (Libreria) session.get(Libreria.class, id);
+		} catch (NullPointerException e) {
+			result="No estás conectado a la BBDD. Conéctate antes: "+e;
+		}
+		result = libro.OneToText();
+		return result;
+	}
+
+	public String[] detailsBook (Session session, int id) {
+		String[] result=new String[6];
+		Libreria libro = (Libreria) session.get(Libreria.class, id);
+		result[0]=libro.getTitulo();
+		result[1]=libro.getAutor();
+		result[2]=libro.getAño_nac();
+		result[3]=libro.getAño_pub();
+		result[4]=libro.getEditorial();
+		result[5]=String.valueOf(libro.getNum_pag());
+		return result;
+	}
+	
+	public int createBook(Session session, String titulo, String autor, String año_nac, String año_pub,
+			String editorial, int num_pag) {
+		Libreria newBook = new Libreria(titulo, autor, año_nac, año_pub, editorial, num_pag);
+		int id = (int) session.save(newBook);
+		session.getTransaction().commit();
+		return id;
+	}
+
+	public void updateBook(Session session, int id, String titulo, String autor, String año_n, String año_p,
+			String editorial, int num_p) {
+		Libreria libroUpdate = (Libreria) session.load(Libreria.class, id);
+		libroUpdate.setTitulo(titulo);
+		libroUpdate.setAutor(autor);
+		libroUpdate.setAño_nac(año_n);
+		libroUpdate.setAño_pub(año_p);
+		libroUpdate.setEditorial(editorial);
+		libroUpdate.setNum_pag(num_p);
+		session.update(libroUpdate);
+		session.getTransaction().commit();
+	}
+
+	public void deleteBook(Session session, int id) {
+		Libreria del = new Libreria();
+		del.setId(id);
+		session.delete(del);
+		session.getTransaction().commit();
+	}
+
+	public void closeSession(Session session, List listado) {
+		listado.clear();
+		session.close();
+	}*/
+}
+

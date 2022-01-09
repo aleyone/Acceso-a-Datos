@@ -1,0 +1,139 @@
+package es.add.aemongodb;
+
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoCollection;
+
+public class Controlador {
+	private Modelo modelo;
+	private Vista vista;
+	private ActionListener alCreateConnection, alCloseConnection, alShowAll, alShowOne, alDeleteOne, alUpdate,
+			alCreateBook, alLoadID, alRemoveID;
+	private String listBook;
+
+	public Controlador(Modelo modelo, Vista vista) {
+		this.modelo = modelo;
+		this.vista = vista;
+		control();
+	}
+
+	public void control() {
+		alCreateConnection = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				MongoCollection cliente = modelo.createConnection();
+				vista.getTextArea().setText("Se ha creado correctamente la conexión a la base de datos.\n\n"
+						+ "MOSTRAR REGISTROS: Para ver todos los registros, pulsa 'Mostrar todos los registros'."
+						+ "MODIFICAR REGISTRO: Selecciona un criterio con el radiobutton, introduce el dato deseado en el campo de texto,\n"
+						+ "modifica en la línea inferior ese criterio y pulsa 'Modifica el registro\n"
+						+ "CREAR REGISTRO: Introduce datos en la línea inferior y pulsa 'Crear registro'.\n"
+						+ "ELIMINAR REGISTROS: Selecciona un criterio con el radiobutton, introduce el dato deseado en el campo de texto,\n"
+						+ "pulsa 'Eliminar'.");
+				}
+		};
+		vista.getBtnCreateConnection().addActionListener(alCreateConnection);
+		
+		alShowAll = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				vista.getTextArea().setText(null);
+				MongoCollection collection = modelo.createConnection();
+				vista.getTextArea().setText(modelo.listBooks(collection));
+				
+			}
+		};
+		vista.getBtnShowBooks().addActionListener(alShowAll);
+		
+		/*
+		alShowOne = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				vista.getTextArea().setText(null);
+				Session session = modelo.createConnection();
+				int id = Integer.parseInt(vista.getTextField_ID().getText());
+				vista.getTextArea().setText(modelo.showOneBook(session, id));
+				
+			}
+		};
+		vista.getBtnShowOneBook().addActionListener(alShowOne);*/
+		
+		alDeleteOne = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				String criterio = "";
+				String busqueda ="";
+				vista.getTextArea().setText(null);
+				MongoCollection collection = modelo.createConnection();
+				busqueda = vista.getTextField().getText();
+				if (vista.getRadioGrupo().isSelected()){
+					criterio = "Grupo";
+					String grupo = vista.getTextField_Titulo().getText();
+					modelo.deleteMany(collection, criterio, busqueda);
+				} else if (vista.getRadioTitulo().isSelected()) {
+					criterio ="Titulo";
+					String titulo = vista.getTextField_Autor().getText();
+					modelo.deleteMany(collection, criterio, busqueda);
+				} else if (vista.getRadioFormato().isSelected()) {
+					criterio = "Formato";
+					String formato = vista.getTextField_Editorial().getText();
+					modelo.deleteMany(collection, criterio, busqueda);
+				} else if (vista.getRdbtnAnyoP().isSelected()) {
+					criterio = "Anyo";
+					String año = vista.getTextField_AñoN().getText();
+					modelo.deleteMany(collection, criterio, (int) Integer.parseInt(busqueda));
+				}				
+				
+				vista.getTextArea().setText("Ha sido eliminado el registro de la base de datos.");
+				
+			}
+		};
+		vista.getBtnDeleteBook().addActionListener(alDeleteOne);
+		
+		alUpdate = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				String criterio = "";
+				String busqueda ="";
+				vista.getTextArea().setText(null);
+				MongoCollection collection = modelo.createConnection();
+				busqueda = vista.getTextField().getText();
+				if (vista.getRadioGrupo().isSelected()){
+					criterio = "Grupo";
+					String grupo = vista.getTextField_Titulo().getText();
+					modelo.updateRegistry(collection, criterio, busqueda, grupo);
+				} else if (vista.getRadioTitulo().isSelected()) {
+					criterio ="Titulo";
+					String titulo = vista.getTextField_Autor().getText();
+					modelo.updateRegistry(collection, criterio, busqueda, titulo);
+				} else if (vista.getRadioFormato().isSelected()) {
+					criterio = "Formato";
+					String formato = vista.getTextField_Editorial().getText();
+					modelo.updateRegistry(collection, criterio, busqueda, formato);
+				} else if (vista.getRdbtnAnyoP().isSelected()) {
+					criterio = "Anyo";
+					String año = vista.getTextField_AñoN().getText();
+					modelo.updateRegistry(collection, criterio, (int) Integer.parseInt(busqueda), (int) Integer.parseInt(año));
+				}				
+				
+				vista.getTextArea().setText("Ha sido modificado el registro de la base de datos.");
+				
+			}
+		};
+		vista.getBtnUpdateBook().addActionListener(alUpdate);
+		
+		alCreateBook = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				vista.getTextArea().setText(null);
+				MongoCollection collection = modelo.createConnection();
+				String grupo = vista.getTextField_Titulo().getText();
+				String titulo = vista.getTextField_Autor().getText();
+				String año_p = vista.getTextField_AñoN().getText();
+				String formato = vista.getTextField_Editorial().getText();
+				modelo.createBook(collection, grupo, titulo, (int)Integer.parseInt(año_p), formato);
+				vista.getTextArea().setText("Ha sido añadido el registro a MongoDB.");
+				
+			}
+		};
+		vista.getBtnCreateBook().addActionListener(alCreateBook);
+		
+	}
+}
+
