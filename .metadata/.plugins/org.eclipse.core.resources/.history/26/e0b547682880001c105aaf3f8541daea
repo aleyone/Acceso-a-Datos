@@ -1,0 +1,73 @@
+package es.addaev06.ae06;
+
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+import java.awt.Color;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+
+public class Vista extends JPanel {
+	private JTextField textField;
+
+	/**
+	 * Create the panel.
+	 */
+	public Vista() {
+		setBackground(new Color(250, 240, 230));
+		setBorder(new TitledBorder(null, "MongoDB Reloaded", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(139, 0, 0)));
+		setLayout(null);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(24, 33, 409, 374);
+		add(textArea);
+		
+		JButton btnConnect = new JButton("CONNECT");
+		btnConnect.setBackground(new Color(0, 128, 0));
+		btnConnect.setBounds(24, 418, 129, 46);
+		add(btnConnect);
+		
+		JButton btnShowAll = new JButton("SHOW ALL");
+		btnShowAll.setBounds(304, 418, 129, 46);
+		add(btnShowAll);
+		
+		JButton btnShowOne = new JButton("SHOW DETAILS");
+		btnShowOne.setBounds(655, 107, 129, 46);
+		add(btnShowOne);
+		
+		JButton btnDelete = new JButton("DELETE BOOK");
+		btnDelete.setBounds(655, 165, 129, 46);
+		add(btnDelete);
+		
+		JButton btnDisconnect = new JButton("DISCONNECT");
+		btnDisconnect.setBackground(new Color(220, 20, 60));
+		btnDisconnect.setBounds(163, 418, 129, 46);
+		add(btnDisconnect);
+		
+		JLabel lblWelcome = new JLabel("Welcome to Library");
+		lblWelcome.setFont(new Font("Book Antiqua", Font.BOLD, 31));
+		lblWelcome.setBounds(474, 11, 361, 74);
+		add(lblWelcome);
+		
+		JLabel lblSelectTo = new JLabel("Select ID             to");
+		lblSelectTo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblSelectTo.setBounds(467, 163, 168, 46);
+		add(lblSelectTo);
+		
+		textField = new JTextField();
+		textField.setBounds(542, 171, 44, 34);
+		add(textField);
+		textField.setColumns(10);
+		
+		JButton btnUpdate = new JButton("UPDATE BOOK");
+		btnUpdate.setBounds(655, 222, 129, 46);
+		add(btnUpdate);
+		
+		JButton btnCreate = new JButton("CREATE BOOK");
+		btnCreate.setBounds(606, 418, 129, 46);
+		add(btnCreate);
+
+	}
+}

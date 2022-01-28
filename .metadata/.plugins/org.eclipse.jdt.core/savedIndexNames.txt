@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+C:\Users\don_e\AccesoADatos\Tema3_MongoDB\AE_MongoDB_The_Remake\.metadata\.plugins\org.eclipse.jdt.core
+3559178495.index
+3248762726.index
+1991655398.index
+4078303710.index

@@ -1,0 +1,194 @@
+package es.addaev06.ae06;
+
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+import java.awt.Color;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+
+public class Vista extends JPanel {
+	private JTextField textField, txtTtulo, textAnyoN, textAnyoP, textEditorial, textNumP, textAutor;
+	private JTextArea textArea;
+	private JButton btnConnect, btnShowAll, btnShowOne, btnDelete, btnDisconnect, btnUpdate, btnCreate;
+	private JLabel lblWelcome, lblSelectTo, lblTitulo, lblAutor, lblAnyoNac, lblAnyoPub, lblEditorial, lblNumPag,
+			lblInfo;
+
+	/**
+	 * Create the panel.
+	 */
+	public Vista() {
+		setBackground(new Color(250, 240, 230));
+		setBorder(new TitledBorder(null, "MongoDB Reloaded", TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(139, 0, 0)));
+		setLayout(null);
+
+		// TextArea
+		textArea = new JTextArea();
+		textArea.setBounds(24, 33, 409, 374);
+		add(textArea);
+
+		// Buttons
+
+		btnConnect = new JButton("CONNECT");
+		btnConnect.setBackground(new Color(0, 128, 0));
+		btnConnect.setBounds(24, 418, 129, 46);
+		add(btnConnect);
+
+		btnShowAll = new JButton("SHOW ALL");
+		btnShowAll.setBounds(304, 418, 129, 46);
+		add(btnShowAll);
+
+		btnShowOne = new JButton("SHOW DETAILS");
+		btnShowOne.setBounds(655, 107, 129, 46);
+		add(btnShowOne);
+
+		btnDelete = new JButton("DELETE BOOK");
+		btnDelete.setBounds(655, 165, 129, 46);
+		add(btnDelete);
+
+		btnDisconnect = new JButton("DISCONNECT");
+		btnDisconnect.setBackground(new Color(220, 20, 60));
+		btnDisconnect.setBounds(163, 418, 129, 46);
+		add(btnDisconnect);
+
+		btnUpdate = new JButton("UPDATE BOOK");
+		btnUpdate.setBounds(655, 222, 129, 46);
+		add(btnUpdate);
+
+		btnCreate = new JButton("CREATE BOOK");
+		btnCreate.setBounds(606, 418, 129, 46);
+		add(btnCreate);
+
+		// Labels
+
+		lblWelcome = new JLabel("Welcome to Library");
+		lblWelcome.setFont(new Font("Book Antiqua", Font.BOLD, 31));
+		lblWelcome.setBounds(474, 11, 361, 74);
+		add(lblWelcome);
+
+		lblSelectTo = new JLabel("Select ID             to");
+		lblSelectTo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblSelectTo.setBounds(467, 163, 168, 46);
+		add(lblSelectTo);
+
+		lblTitulo = new JLabel("T\u00EDtulo");
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTitulo.setBounds(451, 279, 49, 14);
+		add(lblTitulo);
+
+		lblAutor = new JLabel("Autor");
+		lblAutor.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblAutor.setBounds(615, 279, 49, 14);
+		add(lblAutor);
+
+		lblAnyoNac = new JLabel("A\u00F1o N.");
+		lblAnyoNac.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblAnyoNac.setBounds(774, 279, 49, 14);
+		add(lblAnyoNac);
+
+		lblAnyoPub = new JLabel("A\u00F1o P.");
+		lblAnyoPub.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblAnyoPub.setBounds(521, 347, 49, 14);
+		add(lblAnyoPub);
+
+		lblEditorial = new JLabel("Editorial");
+		lblEditorial.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblEditorial.setBounds(615, 347, 49, 14);
+		add(lblEditorial);
+
+		lblNumPag = new JLabel("Num. P.");
+		lblNumPag.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNumPag.setBounds(774, 347, 49, 14);
+		add(lblNumPag);
+
+		lblInfo = new JLabel("");
+		lblInfo.setForeground(new Color(255, 0, 0));
+		lblInfo.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblInfo.setBounds(570, 75, 214, 21);
+		add(lblInfo);
+
+		// TextFields
+
+		textField = new JTextField();
+		textField.setBounds(542, 171, 44, 34);
+		add(textField);
+		textField.setColumns(10);
+
+		txtTtulo = new JTextField();
+		txtTtulo.setBounds(451, 296, 149, 34);
+		add(txtTtulo);
+		txtTtulo.setColumns(10);
+
+		textAnyoN = new JTextField();
+		textAnyoN.setColumns(10);
+		textAnyoN.setBounds(774, 296, 79, 34);
+		add(textAnyoN);
+
+		textAnyoP = new JTextField();
+		textAnyoP.setColumns(10);
+		textAnyoP.setBounds(521, 362, 79, 34);
+		add(textAnyoP);
+
+		textEditorial = new JTextField();
+		textEditorial.setColumns(10);
+		textEditorial.setBounds(615, 362, 149, 34);
+		add(textEditorial);
+
+		textNumP = new JTextField();
+		textNumP.setColumns(10);
+		textNumP.setBounds(774, 362, 79, 34);
+		add(textNumP);
+
+		textAutor = new JTextField();
+		textAutor.setColumns(10);
+		textAutor.setBounds(615, 296, 149, 34);
+		add(textAutor);
+
+		setVisible(true);
+
+	}
+
+	// Getters / Setters
+	public JButton getBtnConnect() {
+		return btnConnect;
+	}
+
+	public JButton getBtnShowAll() {
+		return btnShowAll;
+	}
+
+	public JButton getBtnShowOne() {
+		return btnShowOne;
+	}
+
+	public JButton getBtnDelete() {
+		return btnDelete;
+	}
+
+	public JButton getBtnDisconnect() {
+		return btnDisconnect;
+	}
+
+	public JButton getBtnUpdate() {
+		return btnUpdate;
+	}
+
+	public JButton getBtnCreate() {
+		return btnCreate;
+	}
+
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+
+	public JLabel getLblInfo() {
+		return lblInfo;
+	}
+
+	public JTextField getTextField() {
+		return textField;
+	}
+}

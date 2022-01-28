@@ -1,0 +1,18 @@
+package es.addaev06.ae06;
+
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+import java.awt.Color;
+
+public class Vista extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public Vista() {
+		setBackground(new Color(250, 240, 230));
+		setBorder(new TitledBorder(null, "MongoDB Reloaded", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(139, 0, 0)));
+
+	}
+
+}

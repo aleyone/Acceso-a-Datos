@@ -1,0 +1,123 @@
+package es.addaev06.ae06;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.bson.Document;
+import org.json.JSONObject;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+
+public class Modelo {
+	private MongoClient client;
+	private MongoCollection<Document> collection;
+	private MongoCursor<Document> cursor;
+	private List<String> id=new ArrayList<String>();
+	private String nextId;
+	
+	
+	public MongoClient createConection() {
+		Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
+		mongoLogger.setLevel(Level.SEVERE);
+		client = new MongoClient("localhost", 27017);
+		MongoDatabase db = client.getDatabase("Biblioteca");
+		collection = db.getCollection("Libros");
+		return client;
+	}
+	
+	public void closeConnection(){
+		client.close();
+	}
+
+	public String showAll() {
+		String resultado="";
+		resultado = loopList();
+		System.out.println(resultado);
+		return resultado;
+	}
+	
+	public String Next_Id() {
+		return nextId;
+	}
+
+	public String loopList() {
+		
+		cursor = collection.find().iterator();
+		String resultado="";
+		while (cursor.hasNext()) {
+			JSONObject obj = new JSONObject(cursor.next().toJson());
+			resultado += ("ID: " + obj.getString("Id") + " - TITULO: " + obj.getString("Titol")+"\n");
+			id.add(obj.getString("Id"));			
+		}
+		
+		nextId = String.valueOf(id.size()+1);
+		System.out.println(nextId);
+		return resultado;
+	}
+
+	public String showOne(String id) {
+		String unido = "";
+		cursor = collection.find(Filters.eq("Id", id)).iterator();
+		while (cursor.hasNext()) {
+			JSONObject obj = new JSONObject(cursor.next().toJson());
+			unido = ("_id Mongo: " + obj.get("_id") + "\n" + "Titulo: " + obj.getString("Titol") + "\n" + "Autor: "
+					+ obj.getString("Autor") + "\n" + "Año nacimiento: " + obj.getString("Any_naixement") + "\n"
+					+ "Año publicación: " + obj.getString("Any_publicacio") + "\n" + "Editorial: "
+					+ obj.getString("Editorial") + "\n" + "Nº páginas: " + obj.getString("Nombre_pagines"));
+		}
+		
+		System.out.print(unido);
+
+		return unido;
+	}
+	
+	public String[] loadId(String id) {
+		String[] unido= new String[6];
+		cursor = collection.find(Filters.eq("Id", id)).iterator();
+		while (cursor.hasNext()) {
+			JSONObject obj = new JSONObject(cursor.next().toJson());
+			unido = new String[] {obj.getString("Titol"), obj.getString("Autor"), obj.getString("Any_naixement"),obj.getString("Any_publicacio"), obj.getString("Editorial"), obj.getString("Nombre_pagines")};
+		}
+		
+		return unido;
+	}
+
+	public String createRegistry(String titulo, String autor, String anyo_nac, String anyo_pub, String editorial,
+			String num_pag) {
+		loopList();
+		Document doc = new Document();
+		doc.append("Id", nextId);
+		doc.append("Titol", titulo);
+		doc.append("Autor", autor);
+		doc.append("Any_naixement", anyo_nac);
+		doc.append("Any_publicacio", anyo_pub);
+		doc.append("Editorial", editorial);
+		doc.append("Nombre_pagines", num_pag);
+		collection.insertOne(doc);
+		
+		return nextId;
+	}
+	
+	public void updateRegistry (String id, String titulo, String autor, String anyo_nac, String anyo_pub, String editorial, String num_pag) {
+		collection.updateMany(Filters.eq("Id",id), new Document("$set", new Document("Titol", titulo)));
+		collection.updateMany(Filters.eq("Id",id), new Document("$set", new Document("Autor", autor)));
+		collection.updateMany(Filters.eq("Id",id), new Document("$set", new Document("Any_naixement", anyo_nac)));
+		collection.updateMany(Filters.eq("Id",id), new Document("$set", new Document("Any_publicacio", anyo_pub)));
+		collection.updateMany(Filters.eq("Id",id), new Document("$set", new Document("Editorial", editorial)));
+		collection.updateMany(Filters.eq("Id",id), new Document("$set", new Document("Nombre_pagines", num_pag)));
+	}
+	
+	public void deleteOne (String id) {
+		
+		collection.deleteOne(Filters.eq("Id", id));
+		
+	}
+	
+	
+}

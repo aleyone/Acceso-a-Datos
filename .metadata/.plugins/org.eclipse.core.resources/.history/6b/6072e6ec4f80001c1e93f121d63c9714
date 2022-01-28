@@ -1,0 +1,58 @@
+package es.addaev06.ae06;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import com.mongodb.MongoClient;
+
+public class Controlador {
+
+	private Modelo modelo;
+	private Vista vista;
+	private MongoClient client;
+	private ActionListener alCreateConnection, alCloseConnection, alShowAll, alShowOne, alDeleteOne, alUpdate, alCreate;
+
+	public Controlador(Modelo modelo, Vista vista) {
+		this.modelo = modelo;
+		this.vista = vista;
+		control();
+	}
+
+	public void control() {
+		alCreateConnection = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				modelo.createConection();
+				vista.getLblInfo().setText("LOADED TO COLLECTION");
+			}
+		};
+		vista.getBtnConnect().addActionListener(alCreateConnection);
+
+		alCloseConnection = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				modelo.closeConnection();
+				vista.getLblInfo().setText("CLOSED CONNECTION");
+			}
+		};
+		vista.getBtnDisconnect().addActionListener(alCloseConnection);
+
+		alShowAll = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				vista.getTextArea().setText(modelo.showAll());
+				vista.getLblInfo().setText("COLLECTION LOADED");
+			}
+		};
+		vista.getBtnShowAll().addActionListener(alShowAll);
+
+		alShowOne = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				String id = vista.getTextField().getText();
+				String[] result = modelo.loadId(id)
+				vista.getLblInfo().setText("CLOSED CONNECTION");
+			}
+		};
+		vista.getBtnShowAll().addActionListener(alShowAll);
+		
+		
+		
+	}
+}

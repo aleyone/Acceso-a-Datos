@@ -1,0 +1,46 @@
+package es.addaev06.ae06;
+
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+import java.awt.Color;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+
+public class Vista extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public Vista() {
+		setBackground(new Color(250, 240, 230));
+		setBorder(new TitledBorder(null, "MongoDB Reloaded", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(139, 0, 0)));
+		setLayout(null);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(24, 33, 409, 374);
+		add(textArea);
+		
+		JButton btnConnect = new JButton("CONNECT");
+		btnConnect.setBackground(new Color(0, 128, 0));
+		btnConnect.setBounds(24, 418, 129, 46);
+		add(btnConnect);
+		
+		JButton btnShowAll = new JButton("New button");
+		btnShowAll.setBounds(304, 418, 129, 46);
+		add(btnShowAll);
+		
+		JButton btnNewButton_2 = new JButton("New button");
+		btnNewButton_2.setBounds(474, 148, 129, 46);
+		add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("New button");
+		btnNewButton_3.setBounds(464, 210, 129, 46);
+		add(btnNewButton_3);
+		
+		JButton btnDisconnect = new JButton("DISCONNECT");
+		btnDisconnect.setBackground(new Color(220, 20, 60));
+		btnDisconnect.setBounds(163, 418, 129, 46);
+		add(btnDisconnect);
+
+	}
+}

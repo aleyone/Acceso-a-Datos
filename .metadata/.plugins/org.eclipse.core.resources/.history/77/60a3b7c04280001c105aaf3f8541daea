@@ -1,0 +1,139 @@
+package es.addaev06.ae06;
+
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+import java.awt.Color;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+
+public class Vista extends JPanel {
+	private JTextField textField;
+	private JTextField txtTtulo;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_1;
+
+	/**
+	 * Create the panel.
+	 */
+	public Vista() {
+		setBackground(new Color(250, 240, 230));
+		setBorder(new TitledBorder(null, "MongoDB Reloaded", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(139, 0, 0)));
+		setLayout(null);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(24, 33, 409, 374);
+		add(textArea);
+		
+		JButton btnConnect = new JButton("CONNECT");
+		btnConnect.setBackground(new Color(0, 128, 0));
+		btnConnect.setBounds(24, 418, 129, 46);
+		add(btnConnect);
+		
+		JButton btnShowAll = new JButton("SHOW ALL");
+		btnShowAll.setBounds(304, 418, 129, 46);
+		add(btnShowAll);
+		
+		JButton btnShowOne = new JButton("SHOW DETAILS");
+		btnShowOne.setBounds(655, 107, 129, 46);
+		add(btnShowOne);
+		
+		JButton btnDelete = new JButton("DELETE BOOK");
+		btnDelete.setBounds(655, 165, 129, 46);
+		add(btnDelete);
+		
+		JButton btnDisconnect = new JButton("DISCONNECT");
+		btnDisconnect.setBackground(new Color(220, 20, 60));
+		btnDisconnect.setBounds(163, 418, 129, 46);
+		add(btnDisconnect);
+		
+		JLabel lblWelcome = new JLabel("Welcome to Library");
+		lblWelcome.setFont(new Font("Book Antiqua", Font.BOLD, 31));
+		lblWelcome.setBounds(474, 11, 361, 74);
+		add(lblWelcome);
+		
+		JLabel lblSelectTo = new JLabel("Select ID             to");
+		lblSelectTo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblSelectTo.setBounds(467, 163, 168, 46);
+		add(lblSelectTo);
+		
+		textField = new JTextField();
+		textField.setBounds(542, 171, 44, 34);
+		add(textField);
+		textField.setColumns(10);
+		
+		JButton btnUpdate = new JButton("UPDATE BOOK");
+		btnUpdate.setBounds(655, 222, 129, 46);
+		add(btnUpdate);
+		
+		JButton btnCreate = new JButton("CREATE BOOK");
+		btnCreate.setBounds(606, 418, 129, 46);
+		add(btnCreate);
+		
+		txtTtulo = new JTextField();
+		txtTtulo.setBounds(451, 296, 149, 34);
+		add(txtTtulo);
+		txtTtulo.setColumns(10);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(774, 296, 79, 34);
+		add(textField_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(521, 362, 79, 34);
+		add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(615, 362, 149, 34);
+		add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(774, 362, 79, 34);
+		add(textField_6);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(615, 296, 149, 34);
+		add(textField_1);
+		
+		JLabel lblTitulo = new JLabel("T\u00EDtulo");
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTitulo.setBounds(451, 279, 49, 14);
+		add(lblTitulo);
+		
+		JLabel lblAutor = new JLabel("Autor");
+		lblAutor.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblAutor.setBounds(615, 279, 49, 14);
+		add(lblAutor);
+		
+		JLabel lblAnyoNac = new JLabel("A\u00F1o N.");
+		lblAnyoNac.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblAnyoNac.setBounds(774, 279, 49, 14);
+		add(lblAnyoNac);
+		
+		JLabel lblAnyoPub = new JLabel("A\u00F1o P.");
+		lblAnyoPub.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblAnyoPub.setBounds(521, 347, 49, 14);
+		add(lblAnyoPub);
+		
+		JLabel lblEditorial = new JLabel("Editorial");
+		lblEditorial.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblEditorial.setBounds(615, 347, 49, 14);
+		add(lblEditorial);
+		
+		JLabel lblNumPag = new JLabel("Num. P.");
+		lblNumPag.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNumPag.setBounds(774, 347, 49, 14);
+		add(lblNumPag);
+
+	}
+}
