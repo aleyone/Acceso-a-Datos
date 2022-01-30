@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAVID GIL - ADD - AE07</title>
+    <link rel="stylesheet" href="./styles.css" type="text/css" media="all" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/Javascript">
+        function searchDB() {
+        var strBusqueda = document.getElementById("search").value;
+        axios
+          .get(
+            "https://cima.aemps.es/cima/rest/presentaciones?nombre=" +
+              strBusqueda
+          )
+          .then((response) => {
+            console.log(response.data.resultados);
+
+            var nombre = "";
+            var nregistro=""
+            var laboratorio="";
+            var suministro="";
+            var contador=0;
+           for (let i = 0; i < response.data.resultados.length; i++) {
+           nregistro += response.data.resultados[i].nregistro+"\n"
+           nombre += response.data.resultados[i].nombre+"\n\n";
+           laboratorio += response.data.resultados[i].labtitular+"\n";
+           suministro += response.data.resultados[i].psum+"\n";
+           contador++;
+           }
+           document.getElementById("putName").value = nombre;
+           document.getElementById("putReg").value = nregistro;
+           document.getElementById("putLab").value = laboratorio;
+           document.getElementById("putPsum").value = suministro;
+           document.getElementById("resultados").value = "Hay "+contador+" resultados para tu búsqueda";
+
+          });
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+      function saveDB() {
+        var nregistro = document.getElementById("putReg").value.split("\n");
+        nregistro.pop();
+        var nombre = document.getElementById("putName").value.split("\n\n");
+        nombre.pop();
+        var laboratorio = document.getElementById("putLab").value.split("\n");
+        laboratorio.pop();
+        var activo = document.getElementById("putPsum").value.split("\n");
+        activo.pop();
+
+        var jsonReg = JSON.stringify(nregistro);
+        var jsonName = JSON.stringify(nombre);
+        var jsonLab = JSON.stringify(laboratorio);
+        var jsonAct = JSON.stringify(activo);
+
+        for (let j = 0; j < nregistro.length; j++) {
+          $.ajax({
+            type: "POST", //metodoPOST para enviar datos al servidor
+            url: "conexion.php", // ruta del fichero PHP del servidor
+            data: {
+              nregistro: nregistro[j],
+              nombre: nombre[j],
+              laboratorio: laboratorio[j],
+              activo: activo[j],
+            }, // datos a enviar (p.ej. {valor:valor, nombre:nombre})
+            success: function (response) {
+              //resultado del PHP del servidor
+              alert(response);
+            },
+            error: function () {
+              alert("Error");
+            },
+          });
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>CONEXIÓN ASOCIACIÓN ESPAÑOLA MEDICAMENTO</h1> 
+    </header>
+    <div class="container">
+      <section>
+        <article>
+          <div class="buscamed">
+            <span>Busca el nombre de un medicamento</span>
+            <input
+              type="text"
+              class="search-box"
+              id="search"
+              placeholder="p.e. paracetamol"
+            />
+            <button onclick="searchDB()">Search</button>
+            <button onclick="saveDB()">Save</button>
+          </div>
+          <div style="width: 20%">
+            <p>Nº Registro</p>
+            <textarea
+              id="putReg"
+              rows="10"
+              columns="20"
+              class="text-area"
+              style="width: 200px"
+            ></textarea>
+          </div>
+          <div>
+            <p>Nombre</p>
+            <textarea
+              id="putName"
+              rows="10"
+              columns="20"
+              class="text-area"
+            ></textarea>
+          </div>
+          <div>
+            <p>Laboratorio</p>
+            <textarea id="putLab" class="text-area" rows="10"></textarea>
+          </div>
+          <div style="width: 15%">
+            <p>Activo (s/n)</p>
+            <textarea
+              id="putPsum"
+              class="text-area"
+              rows="10"
+              style="width: 95%"
+            ></textarea>
+          </div>
+          <div
+            class="results"
+            style="text-align: center; justify-content: center;" >
+            <textarea
+              id="resultados"
+              class="text-area"
+              style="border: none; width: 300px;background-color: antiquewhite;"           "
+            ></textarea>
+          </div>
+        </article>
+      </section>
+    </div>
+    <footer>2º DAM - ADD Api Rest 2022 - dagipe01@floridauniversitaria.es</footer>
+  </body>
+</html>
