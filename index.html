@@ -6,23 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DAVID GIL - ADD - AE07</title>
     <link rel="stylesheet" href="./styles.css" type="text/css" media="all" />
+
+<!-- Importamos axios-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/Javascript">
+
         function searchDB() {
         var strBusqueda = document.getElementById("search").value;
         axios
+
+        // Nos decidimos a hacer una búsqueda por presentaciones aunque 
+        //la API permite hacer otro tipo de búsquedas
           .get(
             "https://cima.aemps.es/cima/rest/presentaciones?nombre=" +
               strBusqueda
           )
+
+          // Visualizamos por consola la ruta de los datos deseados para 
+          //capturar los parámetros deseados
           .then((response) => {
             console.log(response.data.resultados);
-
+            
+            //Definimos parámetros y un contador para saber cuántos valores se retornan
             var nombre = "";
             var nregistro=""
             var laboratorio="";
             var suministro="";
             var contador=0;
+
+          //Encadenamos los resultados para cada parámetro deseado e incrementamos contador
            for (let i = 0; i < response.data.resultados.length; i++) {
            nregistro += response.data.resultados[i].nregistro+"\n"
            nombre += response.data.resultados[i].nombre+"\n\n";
@@ -30,6 +42,8 @@
            suministro += response.data.resultados[i].psum+"\n";
            contador++;
            }
+
+           //Incluímos cada variable en su textarea
            document.getElementById("putName").value = nombre;
            document.getElementById("putReg").value = nregistro;
            document.getElementById("putLab").value = laboratorio;
@@ -39,9 +53,16 @@
           });
       }
     </script>
+
+    <!-- Importamos jquery-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript">
+
       function saveDB() {
+        //Recogemos cada cadena de String del text área y hacemos un split línea 
+        //a línea para obtener un array de cada variable. Eliminamos el último registro ya que,
+        //al acabar en salto de línea, dejaba una línea en blanco y por lo tanto incluía
+        //una posición en blanco al final del array
         var nregistro = document.getElementById("putReg").value.split("\n");
         nregistro.pop();
         var nombre = document.getElementById("putName").value.split("\n\n");
@@ -51,11 +72,7 @@
         var activo = document.getElementById("putPsum").value.split("\n");
         activo.pop();
 
-        var jsonReg = JSON.stringify(nregistro);
-        var jsonName = JSON.stringify(nombre);
-        var jsonLab = JSON.stringify(laboratorio);
-        var jsonAct = JSON.stringify(activo);
-
+        //Bucle para enviar los datos de los arrays al php
         for (let j = 0; j < nregistro.length; j++) {
           $.ajax({
             type: "POST", //metodoPOST para enviar datos al servidor
@@ -65,7 +82,7 @@
               nombre: nombre[j],
               laboratorio: laboratorio[j],
               activo: activo[j],
-            }, // datos a enviar (p.ej. {valor:valor, nombre:nombre})
+            },
             success: function (response) {
               //resultado del PHP del servidor
               alert(response);
